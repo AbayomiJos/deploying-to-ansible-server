@@ -1,0 +1,15 @@
+---
+ - name: Deploy webserver
+   hosts: localhost
+   become: yes
+   tasks:
+      - name: Installing Package required
+        apt: name=apache2 state=present
+      - name: Service for webserver need to start
+        service: name=apache2 state=started
+      - name: Having Webpage contents
+        copy: content="This is from Git, GitHub,Jenkins & Ansible" dest=/var/www/html/index.html
+      - name: Service for webserver need to stop
+        service: name=apache2 state=stop
+      - name: Service for webserver need to restart
+        service: name=apache2 state=restart        
